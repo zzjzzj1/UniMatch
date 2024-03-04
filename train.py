@@ -354,7 +354,7 @@ def train(args, train_dataset, train_loader, test_loader,
             psd_label = psd_label * mask
             psd_label = psd_label / (psd_label.sum(1, keepdim=True) + 1e-4)
 
-            loss_cls = (ce_loss(lgt_s, psd_label, reduction='none').mean() + ce_loss(lgt_s1, psd_label,
+            loss_cls = (ce_loss(lgt_s, label, reduction='none').mean() + ce_loss(lgt_s1, label,
                                                                                      reduction='none').mean()) / 2
             # update pseudo label for retainment
             train_dataset.update_psdlabel(psd_label.cpu(), idx, args.alpha)
